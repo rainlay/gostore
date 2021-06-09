@@ -110,14 +110,14 @@ func newXorm(driver string, cfg *XormConfig) (*xorm.Engine, error) {
 
 	log.Println("[MySQL] Connected to database")
 
-	engine.TZLocation, _ = time.LoadLocation("UTC")
-	engine.DatabaseTZ, _ = time.LoadLocation("UTC")
+	db.TZLocation, _ = time.LoadLocation("UTC")
+	db.DatabaseTZ, _ = time.LoadLocation("UTC")
 
 	if cfg.Debug {
 		log.Println("[MySQL] XORM debug mode enabled")
-		engine.ShowSQL(true)
-		engine.Logger().SetLevel(xlog.LOG_DEBUG)
-		pingErr := engine.Ping()
+		db.ShowSQL(true)
+		db.Logger().SetLevel(xlog.LOG_DEBUG)
+		pingErr := db.Ping()
 		if pingErr != nil {
 			log.Println("[MySQL] " + pingErr.Error())
 		}
